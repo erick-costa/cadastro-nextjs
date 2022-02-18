@@ -4,21 +4,29 @@ import Client from "../core/Client";
 
 export default function Home() {
 
-  const clients = [
+    const clients = [
     new Client('Ana', 34, '1'),
     new Client('Bia', 21, '2'),
     new Client('Carlos', 23, '3'),
     new Client('Pedro', 54, '4')
-  ]
+    ]
 
-  return (
+    function selectedClient(client: Client) {
+        console.log(client.name)
+    }
+
+    function deletedClient(client: Client) {
+        console.log(`Excluir... ${client.name}`)
+    }
+
+    return (
     <div className={`
-      flex h-screen justify-center items-center
-      bg-gradient-to-r from-purple-500 to-blue-600 text-white
+        flex h-screen justify-center items-center
+        bg-gradient-to-r from-purple-500 to-blue-600 text-white
     `}>
-      <Layout title="Cadastro Simples">
-        <Table clients={clients}></Table>
-      </Layout>
+        <Layout title="Cadastro Simples">
+        <Table clients={clients} selectedClient={selectedClient} deletedClient={deletedClient}></Table>
+        </Layout>
     </div>
-  )
+    )
 }
