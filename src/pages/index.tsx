@@ -1,46 +1,21 @@
-import { useEffect, useState } from "react"
-import ClientCollection from "../backend/db/ClientCollection"
 import Button from "../components/Button"
 import Form from "../components/Form"
 import Layout from "../components/Layout"
 import Table from "../components/Table"
-import Client from "../core/Client"
-import ClientRepository from "../core/ClientRepository"
+import useClients from "../hooks/useClients"
+import useToggleComponent from "../hooks/useToggleComponent"
 
 export default function Home() {
-  const repo: ClientRepository = new ClientCollection()
-  const [client, setClient] = useState<Client>(Client.empty())
-  const [clients, setClients] = useState<Client[]>([])
-  const [visibility, setVisibility] = useState<"table" | "form">("table")
-
-  useEffect(getAll, [])
-
-  function getAll() {
-    repo.getAll().then((clients) => {
-      setClients(clients)
-      setVisibility("table")
-    })
-  }
-
-  function selectedClient(client: Client) {
-    setClient(client)
-    setVisibility("form")
-  }
-
-  async function deletedClient(client: Client) {
-    await repo.delete(client)
-    getAll()
-  }
-
-  function newClient() {
-    setClient(Client.empty())
-    setVisibility("form")
-  }
-
-  async function saveClient(client: Client) {
-    await repo.save(client)
-    getAll()
-  }
+  const {
+    newClient,
+    clients,
+    selectedClient,
+    deletedClient,
+    client,
+    saveClient,
+    tableVisible,
+    showTable,
+  } = useClients()
 
   return (
     <div
@@ -50,7 +25,7 @@ export default function Home() {
     `}
     >
       <Layout title="Cadastro Simples">
-        {visibility === "table" ? (
+        {tableVisible ? (
           <>
             <div className="flex justify-end">
               <Button color="blue" className="mb-4" onClick={newClient}>
@@ -64,11 +39,7 @@ export default function Home() {
             />
           </>
         ) : (
-          <Form
-            client={client}
-            changeClient={saveClient}
-            cancel={() => setVisibility("table")}
-          />
+          <Form client={client} changeClient={saveClient} cancel={showTable} />
         )}
       </Layout>
     </div>
