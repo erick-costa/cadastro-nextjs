@@ -5,6 +5,8 @@ import Input from "./Input"
 
 interface FormProps {
   client: Client
+  changeClient?: (client: Client) => void
+  cancel?: () => void
 }
 
 export default function Form(props: FormProps) {
@@ -18,8 +20,13 @@ export default function Form(props: FormProps) {
       <Input label="Nome" value={name} onChange={setName} className="mb-5" />
       <Input label="Idade" type="number" value={age} onChange={setAge} />
       <div className="flex justify-end gap-2 mt-5">
-        <Button color="blue">{id ? "Alterar" : "Salvar"}</Button>
-        <Button>Cancelar</Button>
+        <Button
+          color="blue"
+          onClick={() => props.changeClient?.(new Client(name, +age, id))}
+        >
+          {id ? "Alterar" : "Salvar"}
+        </Button>
+        <Button onClick={props.cancel}>Cancelar</Button>
       </div>
     </div>
   )
