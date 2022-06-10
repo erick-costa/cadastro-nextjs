@@ -3,7 +3,6 @@ import Form from "../components/Form"
 import Layout from "../components/Layout"
 import Table from "../components/Table"
 import useClients from "../hooks/useClients"
-import useToggleComponent from "../hooks/useToggleComponent"
 
 export default function Home() {
   const {
