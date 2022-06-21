@@ -6,7 +6,9 @@ Cadastro Simples utilizando NextJs, Tailwind CSS, TypeScript e Firebase
 
 Para instalar rode o comando abaixo:
 
-```npm install```
+```bash
+npm install
+```
 
 ## Como Rodar
 
