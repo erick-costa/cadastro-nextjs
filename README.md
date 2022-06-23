@@ -19,3 +19,7 @@ npm run dev
 ```
 
 Abra [http://localhost:3000](http://localhost:3000) no navegador para ver o resultado.
+
+## Link vercel
+
+Atualmente publicado em: [https://cadastro-nextjs.vercel.app/](https://cadastro-nextjs.vercel.app/)
